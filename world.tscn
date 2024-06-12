@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://iir5e0xf15m2"]
+[gd_scene load_steps=14 format=3 uid="uid://iir5e0xf15m2"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_6wcj3"]
 
@@ -14,6 +14,12 @@ background_mode = 2
 sky = SubResource("Sky_wy23r")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5va0m"]
+albedo_color = Color(0.34902, 0.156863, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2p8t"]
+albedo_color = Color(0.66401, 0.421681, 3.85046e-07, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_npc71"]
 
@@ -45,8 +51,10 @@ environment = SubResource("Environment_glh4o")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069397, 0, 0.719502)
+material_override = SubResource("StandardMaterial3D_5va0m")
+material_overlay = SubResource("StandardMaterial3D_g2p8t")
 use_collision = true
-size = Vector3(24, 0.001, 36)
+size = Vector3(100, 0.001, 100)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969041, -3.23359)
@@ -65,7 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5343, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3397, 0.14886)
-fov = 120.0
+fov = 140.0
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75464, 0.13501, 0)
