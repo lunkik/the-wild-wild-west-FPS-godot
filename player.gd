@@ -4,6 +4,9 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const sensitivity = 0.03
+const BOB_freq = 2.0
+const BOB_amp = 0.08
+var t_BOB = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
@@ -40,5 +43,12 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0.0
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		t_BOB += delta * velocity.length() * float(is_on_floor())
+		camera.transform.origin = _headbob(t_BOB)
 
 	move_and_slide()
+func _headbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = sin(time * BOB_freq) * BOB_amp
+	pos.x = cos(time * BOB_freq / 2) * BOB_amp
+	return pos
