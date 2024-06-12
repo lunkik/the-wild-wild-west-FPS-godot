@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://iir5e0xf15m2"]
+[gd_scene load_steps=16 format=3 uid="uid://iir5e0xf15m2"]
 
+[ext_resource type="Script" path="res://world.gd" id="1_1v3fc"]
 [ext_resource type="Script" path="res://player.gd" id="1_6wcj3"]
+[ext_resource type="Script" path="res://tumbleweed.gd" id="3_miwek"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_knmwx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,26 +27,29 @@ albedo_color = Color(0.66401, 0.421681, 3.85046e-07, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kny86"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_756rn"]
-albedo_color = Color(0, 1, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwwiq"]
+albedo_color = Color(0.414266, 0.208436, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4kp5"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k5aet"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr3sf"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qtvr"]
+albedo_color = Color(0.700228, 0.270715, 0, 1)
+roughness_texture = SubResource("PlaceholderTexture2D_k5aet")
+roughness_texture_channel = 4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbtid"]
-albedo_color = Color(0, 0.262745, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtpd6"]
+albedo_color = Color(0.831373, 0.501961, 0.227451, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03duy"]
-albedo_color = Color(0.282353, 0, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drdwq"]
+albedo_color = Color(0.831373, 0.501961, 0.227451, 1)
 
 [node name="world" type="Node3D"]
+script = ExtResource("1_1v3fc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.101143, 0.861584, -0.497436, 0, 0.5, 0.866026, 0.994872, 0.0875925, -0.0505715, 0, 0, 0)
 shadow_enabled = true
+directional_shadow_max_distance = 200.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_glh4o")
@@ -75,22 +80,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5343, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3397, 0.14886)
 fov = 140.0
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75464, 0.13501, 0)
-material_override = SubResource("StandardMaterial3D_756rn")
-use_collision = true
-size = Vector3(3, 1.27002, 3)
+[node name="tumbleweed" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719593, 0)
+material_override = SubResource("StandardMaterial3D_mwwiq")
+material_overlay = SubResource("StandardMaterial3D_5qtvr")
+script = ExtResource("3_miwek")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30207, 0.807861, 0)
-material_override = SubResource("StandardMaterial3D_s4kp5")
-material_overlay = SubResource("StandardMaterial3D_rr3sf")
-use_collision = true
-size = Vector3(4, 1.61572, 4)
+[node name="fallen temple pillar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.27266, 0, 0)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84302, 0.864197, 0)
-material_override = SubResource("StandardMaterial3D_fbtid")
-material_overlay = SubResource("StandardMaterial3D_03duy")
+[node name="fallen temple pillar bottem" type="CSGBox3D" parent="fallen temple pillar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110668, -0.135879, 0.895053)
+material_override = SubResource("StandardMaterial3D_rtpd6")
 use_collision = true
-size = Vector3(3, 3.72839, 4)
+size = Vector3(3, 1, 1)
+
+[node name="fallen temple pillar" type="CSGCylinder3D" parent="fallen temple pillar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.864908)
+material_override = SubResource("StandardMaterial3D_drdwq")
+use_collision = true
+height = 6.0
+
+[node name="fallen temple pillar2" type="Node3D" parent="fallen temple pillar"]
+transform = Transform3D(-0.858924, 0, -0.512103, 0, 1, 0, 0.512103, 0, -0.858924, 0.038568, 0, -3.75175)
+
+[node name="fallen temple pillar bottem" type="CSGBox3D" parent="fallen temple pillar/fallen temple pillar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110668, -0.135879, 0.895053)
+material_override = SubResource("StandardMaterial3D_rtpd6")
+use_collision = true
+size = Vector3(3, 1, 1)
+
+[node name="fallen temple pillar" type="CSGCylinder3D" parent="fallen temple pillar/fallen temple pillar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.864908)
+material_override = SubResource("StandardMaterial3D_drdwq")
+use_collision = true
+height = 6.0
