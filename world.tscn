@@ -168,3 +168,12 @@ size = Vector3(0.367, 0.049, 0.131)
 transform = Transform3D(0.886066, 0.463559, 0, -0.463559, 0.886066, 0, 0, 0, 1, -3.71615, 0.15892, -2.5106)
 material_override = SubResource("StandardMaterial3D_dp52q")
 size = Vector3(0.367, 0.049, 0.155466)
+
+[node name="dead tree" type="Node3D" parent="."]
+
+[node name="dead tree base" type="CSGCylinder3D" parent="dead tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.90272)
+use_collision = true
+radius = 0.140689
+height = 7.53886
+smooth_faces = false
